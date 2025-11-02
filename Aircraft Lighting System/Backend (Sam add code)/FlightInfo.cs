@@ -17,12 +17,6 @@ namespace AircraftLightsGUI
 
         static Random rnd = new Random();
 
-        //static public List<ExteriorLight> exterior_lights_list = new List<ExteriorLight>();
-        //static public List<DimmingLight> dimming_lights_list = new List<DimmingLight>();
-        //static public List<AsileLight> exterior_lights_list = new List<AsileLight>();
-        //static public List<InteriorLight> exterior_lights_list = new List<InteriorLight>();
-        //static public List<Light> all_lights_list = new List<Light>();
-
         public static void ReadFlightInfo()
         {
             try
@@ -54,13 +48,27 @@ namespace AircraftLightsGUI
 
             if (DateTime.Compare(current_time, landing_time) >= 0)
             {
-                // foreach(Light l in all_lights_list)
-                // {
-                //     if (l.IsOn)
-                //     {
-                //         l.TurnOff
-                //     }
-                // }
+                foreach (Light l in GUI.exterior_lights_list)
+                {
+                    if (l.IsOn)
+                    {
+                        l.TurnOff();
+                    }
+                }
+                foreach (Light l in dimming_lights_list)
+                {
+                    if (l.IsOn)
+                    {
+                        l.TurnOff();
+                    }
+                }
+                foreach(Light l in aisle_lights_list)
+                {
+                    if (l.IsOn)
+                    {
+                        l.TurnOff();
+                    }
+                }
                 LogFile.WriteEvent(current_time, "System", "Plane has landed");
                 Program.InFlight = false;
             }

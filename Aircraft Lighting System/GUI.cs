@@ -18,12 +18,17 @@ namespace AircraftLightsGUI {
         private StatusLight selectedLight;
 
         // The different light states
-        public enum LightStatus{
+        public enum LightStatus
+        {
             Off,
             On,
             Fault,
             Emergency
         }
+        
+        static public List<ExteriorLight> exterior_lights_list = new List<ExteriorLight>();
+        static public List<DimmingLight> dimming_lights_list = new List<DimmingLight>();
+        static public List<AisleLight> aisle_lights_list = new List<AisleLight>();
 
         // Class that defines the properties for each light
         public class StatusLight {
@@ -32,8 +37,10 @@ namespace AircraftLightsGUI {
             public PointF Position { get; set; } // position
             public LightStatus Status { get; set; } // state
             public float Radius { get; set; } = 8f; // Size
-            public bool IsAisleLight { get; set; } = false; 
+            public bool IsAisleLight { get; set; } = false;
             public float Height { get; set; } = 30f; // Size (Seperate for isle lights)
+            
+
 
             // Detects if a light has been clicked
             public bool Contains(PointF point) {
@@ -120,27 +127,46 @@ namespace AircraftLightsGUI {
 
         private void InitializeLights() {
             DimmingLight co00 = new DimmingLight("co00");
+            dimming_lights_list.Add(co00);
             DimmingLight co01 = new DimmingLight("co01");
+            dimming_lights_list.Add(co01);
             DimmingLight co02 = new DimmingLight("co02");
+            dimming_lights_list.Add(co02);
 
             AisleLight ai00 = new AisleLight("ai00");
+            aisle_lights_list.Add(ai00);
             AisleLight ai01 = new AisleLight("ai01");
+            aisle_lights_list.Add(ai01);
             AisleLight ai02 = new AisleLight("ai02");
+            aisle_lights_list.Add(ai02);
 
             DimmingLight se00 = new DimmingLight("se00");
+            dimming_lights_list.Add(se00);
             DimmingLight se01 = new DimmingLight("se01");
+            dimming_lights_list.Add(se01);
             DimmingLight se02 = new DimmingLight("se02");
-            DimmingLight se03 = new DimmingLight("se00");
-            DimmingLight se04 = new DimmingLight("se00");
-            DimmingLight se05 = new DimmingLight("se00");
-            DimmingLight se06 = new DimmingLight("se00");
+            dimming_lights_list.Add(se02);
+            DimmingLight se03 = new DimmingLight("se03");
+            dimming_lights_list.Add(se03);
+            DimmingLight se04 = new DimmingLight("se04");
+            dimming_lights_list.Add(se04);
+            DimmingLight se05 = new DimmingLight("se05");
+            dimming_lights_list.Add(se05);
+            DimmingLight se06 = new DimmingLight("se06");
+            dimming_lights_list.Add(se06);
             DimmingLight se07 = new DimmingLight("se07");
+            dimming_lights_list.Add(se07);
 
             ExteriorLight ta00 = new ExteriorLight("ta00");
+            exterior_lights_list.Add(ta00);
             ExteriorLight ta01 = new ExteriorLight("ta01");
+            exterior_lights_list.Add(ta01);
             ExteriorLight ta02 = new ExteriorLight("ta02");
+            exterior_lights_list.Add(ta02);
             ExteriorLight wi00 = new ExteriorLight("wi00");
+            exterior_lights_list.Add(wi00);
             ExteriorLight wi01 = new ExteriorLight("wi01");
+            exterior_lights_list.Add(wi01);
             
         }
 
@@ -303,7 +329,7 @@ namespace AircraftLightsGUI {
                 var item = new ToolStripMenuItem(text);
                 //update below to call Joels method to update light status
                 //item.Click += (s, e) => SetLightStatus(light, status);
-                UpdateLightClass(light, status);
+                UpdateLightClass(light.ID, status.ToString());
                 menu.Items.Add(item);
             }
 
@@ -362,22 +388,83 @@ namespace AircraftLightsGUI {
             planePanel.Invalidate();
         }
 
-        private void UpdateLightClass(String lightID, string status) {
+        private void UpdateLightClass(string lightID, string status) {
             var light = lights.FirstOrDefault(light => light.ID == lightID);
-            switch (status.ToLower()) {
-                case "off":
-                    Light.TurnOff;
-                case "on":
-                    Light.TurnOn;
-                case "fault":
-                    Light.Fault(true);
-                case "emergency":
-                    Light.EmergencyMaodeOn;
-                    break;
-                case "emergencyoff":
-                    Light.EmergencyModeOff;
-            } 
-            if (status != "Fault") { Light.Fault(false); }
+            bool found = false;
+
+            foreach (DimmingLight dl in dimming_lights_list)
+            {
+                if (dl.LightId == lightID)
+                {
+                    found = true;
+                    switch (status.ToLower())
+                    {
+                        case "off":
+                            dl.TurnOff();
+                            break;
+                        case "on":
+                            dl.TurnOn();
+                            break;
+                        case "fault":
+                            dl.HasFault(true);
+                            break;
+                        case "emergency":
+                            dl.EmergencyModeOn();
+                            break;
+                        case "emergencyoff":
+                            dl.EmergencyModeOff();
+                            break;
+                    }
+                }
+            } if (!found)
+            {
+                foreach (AisleLight al in aisle_lights_list)
+                {
+                    if (al.LightId == lightID)
+                    {
+                        found = true;
+                        switch (status.ToLower())
+                        {
+                            case "off":
+                                al.TurnOff();
+                                break;
+                            case "on":
+                                al.TurnOn();
+                                break;
+                            case "fault":
+                                al.HasFault(true);
+                                break;
+                            case "emergency":
+                                al.EmergencyModeOn();
+                                break;
+                            case "emergencyoff":
+                                al.EmergencyModeOff();
+                                break;
+                        }
+                    }
+                } if (!found)
+                {
+                    foreach (ExteriorLight el in exterior_lights_list)
+                    {
+                        if (el.LightId == lightID)
+                        {
+                            found = true;
+                            switch (status.ToLower())
+                            {
+                                case "off":
+                                    el.TurnOff();
+                                    break;
+                                case "on":
+                                    el.TurnOn();
+                                    break;
+                                case "fault":
+                                    el.HasFault(true);
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
 
         }
     }
