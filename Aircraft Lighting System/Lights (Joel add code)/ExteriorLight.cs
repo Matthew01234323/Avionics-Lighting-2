@@ -32,7 +32,7 @@ namespace AircraftLightsGUI
         {
             IsExteriorLightAuto = true;
             GUI.UpdateLightStatus(LightId, IsOn, IsFault, IsExteriorLightAuto, IsFlashing);
-            LogFile.WriteEvent(FlightInfo.CurrentTime, LightId, "Exterior Light Auto ENABLED");
+            LogFile.WriteEvent(FlightInfo.current_time, LightId, "Exterior Light Auto ENABLED");
         }
 
         // Disable exterior light auto mode, update GUI and log event
@@ -40,7 +40,7 @@ namespace AircraftLightsGUI
         {
             IsExteriorLightAuto = false;
             GUI.UpdateLightStatus(LightId, IsOn, IsFault, IsExteriorLightAuto, IsFlashing);
-            LogFile.WriteEvent(FlightInfo.CurrentTime, LightId, "Exterior Light Auto DISABLED");
+            LogFile.WriteEvent(FlightInfo.current_time, LightId, "Exterior Light Auto DISABLED");
         }
 
         // Operate light based on sunrise and sunset times if exterior light auto mode is enabled
@@ -98,7 +98,7 @@ namespace AircraftLightsGUI
             {
                 IsFlashing = false;
                 GUI.UpdateLightStatus(LightId, IsOn, IsFault, IsExteriorLightAuto, IsFlashing);
-                LogFile.WriteEvent(FlightInfo.CurrentTime, LightId, "Flashing mode DISABLED due to light OFF");
+                LogFile.WriteEvent(FlightInfo.current_time, LightId, "Flashing mode DISABLED due to light OFF");
             }
             return base.TurnOff();
         }

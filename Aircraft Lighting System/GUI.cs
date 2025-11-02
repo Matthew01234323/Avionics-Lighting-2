@@ -341,25 +341,39 @@ namespace AircraftLightsGUI {
         }
 
         // Function called to update lights
-        private void UpdateLightStatus(StatusLight light, bool isFault, bool isEmergency, bool isOn) {
-            if (isFault)
-            { light.Status = LightStatus.Fault; }
-            else if (isEmergency)
-            { light.Status = LightStatus.Emergency; }
-            else if (isOn)
-            { light.Status = LightStatus.On; }
-            else { light.Status = LightStatus.Off; }
-            planePanel.Invalidate();
+        public void UpdateLightStatus(string lightID, bool isFault, bool isEmergency, bool isOn) {
+            foreach (StatusLight light in lights)
+            {
+                if (lightID == light.ID)
+                {
+                    if (isFault)
+                    { light.Status = LightStatus.Fault; }
+                    else if (isEmergency)
+                    { light.Status = LightStatus.Emergency; }
+                    else if (isOn)
+                    { light.Status = LightStatus.On; }
+                    else { light.Status = LightStatus.Off; }
+                    planePanel.Invalidate();
+                    break;
+                }   
+            }
         }
 
         // The same function but without 'emergency' since not every light has that property
-        private void UpdateLightStatus(StatusLight light, bool isFault, bool isOn) {
-            if (isFault)
-            { light.Status = LightStatus.Fault; }
-            else if (isOn)
-            { light.Status = LightStatus.On; }
-            else { light.Status = LightStatus.Off; }
-            planePanel.Invalidate();
+        public void UpdateLightStatus(string lightID, bool isFault, bool isOn) {
+            foreach (StatusLight light in lights)
+            {
+                if (lightID == light.ID)
+                {
+                    if (isFault)
+                    { light.Status = LightStatus.Fault; }
+                    else if (isOn)
+                    { light.Status = LightStatus.On; }
+                    else { light.Status = LightStatus.Off; }
+                    planePanel.Invalidate();
+                    break;
+                }
+            }
         }
 
         // Emergency toggle
