@@ -28,7 +28,6 @@ namespace AircraftLightsGUI {
         
         static public List<ExteriorLight> exterior_lights_list = new List<ExteriorLight>();
         static public List<DimmingLight> dimming_lights_list = new List<DimmingLight>();
-        static public List<AisleLight> aisle_lights_list = new List<AisleLight>();
 
         // Class that defines the properties for each light
         public class StatusLight {
@@ -133,12 +132,12 @@ namespace AircraftLightsGUI {
             DimmingLight co02 = new DimmingLight("co02");
             dimming_lights_list.Add(co02);
 
-            AisleLight ai00 = new AisleLight("ai00");
-            aisle_lights_list.Add(ai00);
-            AisleLight ai01 = new AisleLight("ai01");
-            aisle_lights_list.Add(ai01);
-            AisleLight ai02 = new AisleLight("ai02");
-            aisle_lights_list.Add(ai02);
+            DimmingLight ai00 = new DimmingLight("ai00");
+            dimming_lights_list.Add(ai00);
+            DimmingLight ai01 = new DimmingLight("ai01");
+            dimming_lights_list.Add(ai01);
+            DimmingLight ai02 = new DimmingLight("ai02");
+            dimming_lights_list.Add(ai02);
 
             DimmingLight se00 = new DimmingLight("se00");
             dimming_lights_list.Add(se00);
@@ -418,54 +417,26 @@ namespace AircraftLightsGUI {
                 }
             } if (!found)
             {
-                foreach (AisleLight al in aisle_lights_list)
+                foreach (ExteriorLight el in exterior_lights_list)
                 {
-                    if (al.LightId == lightID)
+                    if (el.LightId == lightID)
                     {
                         found = true;
                         switch (status.ToLower())
                         {
                             case "off":
-                                al.TurnOff();
+                                el.TurnOff();
                                 break;
                             case "on":
-                                al.TurnOn();
+                                el.TurnOn();
                                 break;
                             case "fault":
-                                al.HasFault(true);
+                                el.HasFault(true);
                                 break;
-                            case "emergency":
-                                al.EmergencyModeOn();
-                                break;
-                            case "emergencyoff":
-                                al.EmergencyModeOff();
-                                break;
-                        }
-                    }
-                } if (!found)
-                {
-                    foreach (ExteriorLight el in exterior_lights_list)
-                    {
-                        if (el.LightId == lightID)
-                        {
-                            found = true;
-                            switch (status.ToLower())
-                            {
-                                case "off":
-                                    el.TurnOff();
-                                    break;
-                                case "on":
-                                    el.TurnOn();
-                                    break;
-                                case "fault":
-                                    el.HasFault(true);
-                                    break;
-                            }
                         }
                     }
                 }
             }
-
         }
     }
 }
