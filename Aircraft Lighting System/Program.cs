@@ -4,12 +4,22 @@ namespace AircraftLightsGUI
     {
         public static MainForm? MainFormInstance { get; private set; }
 
+        static public bool InFlight = false;
+
         [STAThread]
-        static void Main()
+        static async void Main()
         {
+            FlightInfo.ReadFlightInfo();
+
             ApplicationConfiguration.Initialize();
             MainFormInstance = new MainForm();
             Application.Run(MainFormInstance);
+
+            while(InFlight)
+            {
+                await Task.Delay(2000);
+                FlightInfo.CheckEvents();
+            }
         }
 
     }
