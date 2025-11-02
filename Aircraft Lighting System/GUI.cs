@@ -310,22 +310,22 @@ namespace AircraftLightsGUI {
         private void EmergencyButton_Click(object sender, EventArgs e) {
             if (IsEmergency == false) {
                 IsEmergency = true;
-                UpdateLightClass("ai01", emergency);
-                UpdateLightClass("ai02", emergency);
-                UpdateLightClass("ai03", emergency);
-                UpdateLightClass("co00", emergency);
-                UpdateLightClass("co01", emergency);
-                UpdateLightClass("co02", emergency);
+                UpdateLightClass("ai01", "emergency");
+                UpdateLightClass("ai02", "emergency");
+                UpdateLightClass("ai03", "emergency");
+                UpdateLightClass("co00", "emergency");
+                UpdateLightClass("co01", "emergency");
+                UpdateLightClass("co02", "emergency");
                 
             }
             else {
                 IsEmergency = false;
-                UpdateLightClass("ai01", emergencyoff);
-                UpdateLightClass("ai02", emergencyoff);
-                UpdateLightClass("ai03", emergencyoff);
-                UpdateLightClass("co00", emergencyoff);
-                UpdateLightClass("co01", emergencyoff);
-                UpdateLightClass("co02", emergencyoff);
+                UpdateLightClass("ai01", "emergencyoff");
+                UpdateLightClass("ai02", "emergencyoff");
+                UpdateLightClass("ai03", "emergencyoff");
+                UpdateLightClass("co00", "emergencyoff");
+                UpdateLightClass("co01", "emergencyoff");
+                UpdateLightClass("co02", "emergencyoff");
             }
             planePanel.Invalidate();
         }
