@@ -55,14 +55,7 @@ namespace AircraftLightsGUI
                         l.TurnOff();
                     }
                 }
-                foreach (Light l in dimming_lights_list)
-                {
-                    if (l.IsOn)
-                    {
-                        l.TurnOff();
-                    }
-                }
-                foreach(Light l in aisle_lights_list)
+                foreach (Light l in GUI.dimming_lights_list)
                 {
                     if (l.IsOn)
                     {
