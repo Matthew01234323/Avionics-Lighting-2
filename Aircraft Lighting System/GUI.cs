@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace AircraftLightsGUI {
-    public class MainForm : Form {
+    public class GUI : Form {
         private Panel planePanel;
         private Button emergencyButton;
         private Button exitButton;
@@ -59,12 +59,14 @@ namespace AircraftLightsGUI {
         }
 
         // Constructor for the form
-        public MainForm() {
+        public GUI() {
             InitializeComponent();
             InitializeLights();
+            InitializeGUILights();
         }
         // Sets up the form and the controls
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             Text = "Aircraft Status Monitor";
             Size = new Size(400, 550);
             StartPosition = FormStartPosition.CenterScreen;
@@ -72,7 +74,8 @@ namespace AircraftLightsGUI {
             MaximizeBox = false;
 
             // Plane drawing panel
-            planePanel = new Panel {
+            planePanel = new Panel
+            {
                 Location = new Point(10, 10),
                 Size = new Size(370, 395),
                 BorderStyle = BorderStyle.FixedSingle,
@@ -82,7 +85,8 @@ namespace AircraftLightsGUI {
             planePanel.MouseClick += PlanePanel_MouseClick;
             Controls.Add(planePanel);
             // Emergency button
-            emergencyButton = new Button {
+            emergencyButton = new Button
+            {
                 Text = "Emergency",
                 Location = new Point(10, 415),
                 Size = new Size(100, 40),
@@ -92,7 +96,8 @@ namespace AircraftLightsGUI {
             Controls.Add(emergencyButton);
 
             // Exit button
-            exitButton = new Button {
+            exitButton = new Button
+            {
                 Text = "Exit",
                 Location = new Point(10, 465),
                 Size = new Size(100, 40)
@@ -101,7 +106,8 @@ namespace AircraftLightsGUI {
             Controls.Add(exitButton);
 
             // Textbox
-            infoTextBox = new TextBox {
+            infoTextBox = new TextBox
+            {
                 Location = new Point(130, 415),
                 Size = new Size(250, 90),
                 Multiline = true,
@@ -112,8 +118,34 @@ namespace AircraftLightsGUI {
             Controls.Add(infoTextBox);
         }
 
-        // Creates and positions all of the lights
         private void InitializeLights() {
+            DimmingLight co00 = new DimmingLight("co00");
+            DimmingLight co01 = new DimmingLight("co01");
+            DimmingLight co02 = new DimmingLight("co02");
+
+            AisleLight ai00 = new AisleLight("ai00");
+            AisleLight ai01 = new AisleLight("ai01");
+            AisleLight ai02 = new AisleLight("ai02");
+
+            DimmingLight se00 = new DimmingLight("se00");
+            DimmingLight se01 = new DimmingLight("se01");
+            DimmingLight se02 = new DimmingLight("se02");
+            DimmingLight se03 = new DimmingLight("se00");
+            DimmingLight se04 = new DimmingLight("se00");
+            DimmingLight se05 = new DimmingLight("se00");
+            DimmingLight se06 = new DimmingLight("se00");
+            DimmingLight se07 = new DimmingLight("se07");
+
+            ExteriorLight ta00 = new ExteriorLight("ta00");
+            ExteriorLight ta01 = new ExteriorLight("ta01");
+            ExteriorLight ta02 = new ExteriorLight("ta02");
+            ExteriorLight wi00 = new ExteriorLight("wi00");
+            ExteriorLight wi01 = new ExteriorLight("wi01");
+            
+        }
+
+        // Creates and positions all of the lights
+        private void InitializeGUILights() {
             lights = new List<StatusLight>();
 
             // Nose section
@@ -139,9 +171,9 @@ namespace AircraftLightsGUI {
             // Aisle lights - these are different since they are rectuangular
             lights.AddRange(new[]
             {
-                new StatusLight { ID = "ai01", DisplayName = "Aisle Light 1", Position = new PointF(185, 150), IsAisleLight = true, Height = 50f },
-                new StatusLight { ID = "ai02", DisplayName = "Aisle Light 2", Position = new PointF(185, 200), IsAisleLight = true, Height = 50f },
-                new StatusLight { ID = "ai03", DisplayName = "Aisle Light 3", Position = new PointF(185, 250), IsAisleLight = true, Height = 50f }
+                new StatusLight { ID = "ai00", DisplayName = "Aisle Light 1", Position = new PointF(185, 150), IsAisleLight = true, Height = 50f },
+                new StatusLight { ID = "ai01", DisplayName = "Aisle Light 2", Position = new PointF(185, 200), IsAisleLight = true, Height = 50f },
+                new StatusLight { ID = "ai02", DisplayName = "Aisle Light 3", Position = new PointF(185, 250), IsAisleLight = true, Height = 50f }
             });
 
             // Tail
@@ -284,7 +316,7 @@ namespace AircraftLightsGUI {
         }
 
         // Function called to update lights
-        private void SetLightStatus(StatusLight light, bool isFault, bool isEmergency, bool isOn) {
+        private void UpdateLightStatus(StatusLight light, bool isFault, bool isEmergency, bool isOn) {
             if (isFault)
             { light.Status = LightStatus.Fault; }
             else if (isEmergency)
