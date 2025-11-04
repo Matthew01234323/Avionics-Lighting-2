@@ -1,0 +1,118 @@
+01/11/2025 18:00:00 System: Flight Info read successfully
+01/11/2025 18:00:00 co00: turned OFF
+01/11/2025 18:00:00 co00: turned ON
+01/11/2025 18:00:00 co00: turned OFF
+01/11/2025 18:00:00 co00: FAULT detected
+01/11/2025 18:00:00 co00: FAULT detected
+01/11/2025 18:00:00 co00: Colour set to Red
+01/11/2025 18:00:00 co00: Set to Emergency Mode
+01/11/2025 18:00:00 se03: turned OFF
+01/11/2025 18:00:00 se03: turned ON
+01/11/2025 18:00:00 se03: turned OFF
+01/11/2025 18:00:00 se03: FAULT detected
+01/11/2025 18:00:00 se03: FAULT detected
+01/11/2025 18:00:00 se03: Colour set to Red
+01/11/2025 18:00:00 se03: Set to Emergency Mode
+01/11/2025 18:00:00 se04: turned OFF
+01/11/2025 18:00:00 se04: turned ON
+01/11/2025 18:00:00 se04: turned OFF
+01/11/2025 18:00:00 se04: FAULT detected
+01/11/2025 18:00:00 se04: FAULT detected
+01/11/2025 18:00:00 se04: Colour set to Red
+01/11/2025 18:00:00 se04: Set to Emergency Mode
+01/11/2025 18:00:00 se02: turned OFF
+01/11/2025 18:00:00 se02: turned ON
+01/11/2025 18:00:00 se02: turned OFF
+01/11/2025 18:00:00 se02: FAULT detected
+01/11/2025 18:00:00 se02: FAULT detected
+01/11/2025 18:00:00 se02: Colour set to Red
+01/11/2025 18:00:00 se02: Set to Emergency Mode
+01/11/2025 18:00:00 se01: turned OFF
+01/11/2025 18:00:00 se01: turned ON
+01/11/2025 18:00:00 se01: turned OFF
+01/11/2025 18:00:00 se01: FAULT detected
+01/11/2025 18:00:00 se01: FAULT detected
+01/11/2025 18:00:00 se01: Colour set to Red
+01/11/2025 18:00:00 se01: Set to Emergency Mode
+01/11/2025 18:00:00 se00: turned OFF
+01/11/2025 18:00:00 se00: turned ON
+01/11/2025 18:00:00 se00: turned OFF
+01/11/2025 18:00:00 se00: FAULT detected
+01/11/2025 18:00:00 se00: FAULT detected
+01/11/2025 18:00:00 se00: Colour set to Red
+01/11/2025 18:00:00 se00: Set to Emergency Mode
+01/11/2025 18:00:00 se06: turned OFF
+01/11/2025 18:00:00 se06: turned ON
+01/11/2025 18:00:00 se06: turned OFF
+01/11/2025 18:00:00 se06: FAULT detected
+01/11/2025 18:00:00 se06: FAULT detected
+01/11/2025 18:00:00 se06: Colour set to Red
+01/11/2025 18:00:00 se06: Set to Emergency Mode
+01/11/2025 18:00:00 co01: turned OFF
+01/11/2025 18:00:00 co01: turned ON
+01/11/2025 18:00:00 co01: turned OFF
+01/11/2025 18:00:00 co01: FAULT detected
+01/11/2025 18:00:00 co01: FAULT detected
+01/11/2025 18:00:00 co01: Colour set to Red
+01/11/2025 18:00:00 co01: Set to Emergency Mode
+01/11/2025 18:00:00 ai01: turned ON
+01/11/2025 18:00:00 ai01: Colour set to Red
+01/11/2025 18:00:00 ai01: Set to Emergency Mode
+01/11/2025 18:00:00 ai02: turned ON
+01/11/2025 18:00:00 ai02: Colour set to Red
+01/11/2025 18:00:00 ai02: Set to Emergency Mode
+01/11/2025 18:00:00 co00: FAULT detected
+01/11/2025 18:00:00 co00: Colour set to Red
+01/11/2025 18:00:00 co00: Set to Emergency Mode
+01/11/2025 18:00:00 co01: FAULT detected
+01/11/2025 18:00:00 co01: Colour set to Red
+01/11/2025 18:00:00 co01: Set to Emergency Mode
+01/11/2025 18:00:00 co02: turned ON
+01/11/2025 18:00:00 co02: Colour set to Red
+01/11/2025 18:00:00 co02: Set to Emergency Mode
+01/11/2025 18:00:00 ai01: Colour set to White
+01/11/2025 18:00:00 ai01: Emergency Mode OFF, colour set to White, light ENABLED
+01/11/2025 18:00:00 ai02: Colour set to White
+01/11/2025 18:00:00 ai02: Emergency Mode OFF, colour set to White, light ENABLED
+01/11/2025 18:00:00 co00: Colour set to White
+01/11/2025 18:00:00 co00: Emergency Mode OFF, colour set to White, light ENABLED
+01/11/2025 18:00:00 co01: Colour set to White
+01/11/2025 18:00:00 co01: Emergency Mode OFF, colour set to White, light ENABLED
+01/11/2025 18:00:00 co02: Colour set to White
+01/11/2025 18:00:00 co02: Emergency Mode OFF, colour set to White, light ENABLED
+01/11/2025 18:00:00 wi00: turned ON
+01/11/2025 18:00:00 wi00: FAULT detected
+01/11/2025 18:00:00 wi01: turned ON
+01/11/2025 18:00:00 wi01: FAULT detected
+01/11/2025 18:00:00 ta02: turned ON
+01/11/2025 18:00:00 ta02: FAULT detected
+01/11/2025 18:00:00 se01: turned OFF
+01/11/2025 18:00:00 se01: FAULT detected
+01/11/2025 18:00:00 se01: FAULT detected
+01/11/2025 18:00:00 se01: Colour set to Red
+01/11/2025 18:00:00 se01: Set to Emergency Mode
+01/11/2025 18:00:00 se00: turned OFF
+01/11/2025 18:00:00 se00: FAULT detected
+01/11/2025 18:00:00 se00: FAULT detected
+01/11/2025 18:00:00 se00: Colour set to Red
+01/11/2025 18:00:00 se00: Set to Emergency Mode
+01/11/2025 18:00:00 ai00: turned OFF
+01/11/2025 18:00:00 ai00: turned ON
+01/11/2025 18:00:00 ai00: turned OFF
+01/11/2025 18:00:00 ai00: FAULT detected
+01/11/2025 18:00:00 ai00: FAULT detected
+01/11/2025 18:00:00 ai00: Colour set to Red
+01/11/2025 18:00:00 ai00: Set to Emergency Mode
+01/11/2025 18:00:00 se05: turned OFF
+01/11/2025 18:00:00 se05: turned ON
+01/11/2025 18:00:00 se05: turned OFF
+01/11/2025 18:00:00 se05: FAULT detected
+01/11/2025 18:00:00 se05: FAULT detected
+01/11/2025 18:00:00 se05: Colour set to Red
+01/11/2025 18:00:00 se05: Set to Emergency Mode
+01/11/2025 18:35:00 ta00: turned ON
+01/11/2025 18:35:00 ta01: turned ON
+01/11/2025 19:00:00 co02: turned OFF
+01/11/2025 19:00:00 ai01: turned OFF
+01/11/2025 19:00:00 ai02: turned OFF
+01/11/2025 19:00:00 System: Plane has landed
