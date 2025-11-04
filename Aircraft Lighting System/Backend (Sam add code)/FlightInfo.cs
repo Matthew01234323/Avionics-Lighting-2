@@ -69,16 +69,16 @@ namespace AircraftLightsGUI
             {
                 if (DateTime.Compare(current_time, sunset_time) > 0 && DateTime.Compare(current_time, sunrise_time) < 0)
                 {
-                    // foreach(ExteriorLight el in exterior_lights_list)
-                    // {
-                    //     if (!el.IsOn)
-                    //     {
-                    //         el.TurnOn();
-                    //     }
+                    foreach(ExteriorLight el in GUI.exterior_lights_list)
+                    {
+                        if (!el.IsOn)
+                        {
+                            el.TurnOn();
+                        }
 
-                    // }
+                    }
 
-                    // foreach(AsileLight al in asile_lights_list)
+                    // foreach(DimmingLight al in dimming_lights_list)
                     // {
                     //     if (al.brightness != 3)
                     //     {
