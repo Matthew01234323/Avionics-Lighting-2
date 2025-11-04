@@ -52,20 +52,6 @@ namespace AircraftLightsGUI
             LogFile.WriteEvent(FlightInfo.current_time, LightId, "ENABLED");
         }
 
-        // Control TurnOn based on disabled status and log event
-        public override bool TurnOn()
-        {
-            if (!IsDisabled)
-            {
-                return base.TurnOn();
-            }
-            else
-            {
-                //LogFile.WriteEvent(FlightInfo.CurrentTime, LightId, "Turn ON blocked - light is DISABLED");
-                return false;
-            }
-        }
-
         // Set the colour of the light, log event and update GUI
         public void SetColour(string newColour)
         {
@@ -80,11 +66,13 @@ namespace AircraftLightsGUI
             
             IsEmergency = true;
             IsDisabled = false;
+            if (!IsOn)
+            {
+                TurnOn();
+            }
             SetColour("Red");
             GUI.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
-            LogFile.WriteEvent(FlightInfo.current_time, LightId, "Set to Emergency Mode");
-            return base.TurnOn();
-                  
+            LogFile.WriteEvent(FlightInfo.current_time, LightId, "Set to Emergency Mode");  
         }
 
         // Deactivate emergency mode: set colour to White, enable light, update GUI and log event
@@ -96,6 +84,22 @@ namespace AircraftLightsGUI
             GUI.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
             LogFile.WriteEvent(FlightInfo.current_time, LightId, "Emergency Mode OFF, colour set to White, light ENABLED");
         }
+
+        // Features for next version:
+
+        // Control TurnOn based on disabled status and log event
+        /*public override bool TurnOn()
+        {
+            if (!IsDisabled)
+            {
+                return base.TurnOn();
+            }
+            else
+            {
+                //LogFile.WriteEvent(FlightInfo.CurrentTime, LightId, "Turn ON blocked - light is DISABLED");
+                return false;
+            }
+        }*/
     }
 }
 
