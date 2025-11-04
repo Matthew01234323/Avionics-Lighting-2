@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="GUI.cs %28Matthew add code%29" />
+    <Compile Include="GUI.cs" />
   </ItemGroup>
 
 </Project>
