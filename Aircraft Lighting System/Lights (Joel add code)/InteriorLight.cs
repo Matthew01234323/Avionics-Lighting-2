@@ -61,7 +61,7 @@ namespace AircraftLightsGUI
         }
         // Activate emergency mode: set colour to Red, update GUI and log event
 
-        public bool EmergencyModeOn()
+        public void EmergencyModeOn()
         {
             
             IsEmergency = true;
