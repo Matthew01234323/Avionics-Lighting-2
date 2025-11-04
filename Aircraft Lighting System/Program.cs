@@ -7,7 +7,7 @@ namespace AircraftLightsGUI
         static public bool InFlight = false;
 
         [STAThread]
-        static async void Main()
+        static void Main()
         {
             FlightInfo.ReadFlightInfo();
 
@@ -17,7 +17,7 @@ namespace AircraftLightsGUI
 
             while(InFlight)
             {
-                await Task.Delay(2000);
+                Task.Delay(2000);
                 FlightInfo.CheckEvents();
             }
         }
