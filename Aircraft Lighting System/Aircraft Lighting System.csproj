@@ -9,8 +9,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="GUI.cs %28Matthew add code%29" />
-  </ItemGroup>
+  <!-- <ItemGroup>
+    <Compile Include="GUI.cs" />
+  </ItemGroup> -->
 
 </Project>

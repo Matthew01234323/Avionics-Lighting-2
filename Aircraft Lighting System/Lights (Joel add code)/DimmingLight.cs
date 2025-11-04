@@ -27,12 +27,12 @@ namespace AircraftLightsGUI
             if (value >= 1 && value <= 10)
             {
                 Brightness = value;
-                GUI.UpdateLightStatus(LightId, IsOn, IsFault, IsDisabled, IsEmergency, Colour, Brightness);
-                LogFile.WriteEvent(FlightInfo.CurrentTime, LightId, $"brightness set to {Brightness}");
+                Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
+                LogFile.WriteEvent(FlightInfo.current_time, LightId, $"brightness set to {Brightness}");
             }
             else
             {
-                LogFile.WriteEvent(FlightInfo.CurrentTime, LightId, $"invalid brightness value: {value}");
+                LogFile.WriteEvent(FlightInfo.current_time, LightId, $"invalid brightness value: {value}");
             }
         }
 

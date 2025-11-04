@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace AircraftLightsGUI {
-    public class MainForm : Form {
+    public class GUI : Form {
         private Panel planePanel;
         private Button emergencyButton;
         private Button exitButton;
@@ -18,12 +18,16 @@ namespace AircraftLightsGUI {
         private StatusLight selectedLight;
 
         // The different light states
-        public enum LightStatus{
+        public enum LightStatus
+        {
             Off,
             On,
             Fault,
             Emergency
         }
+        
+        static public List<ExteriorLight> exterior_lights_list = new List<ExteriorLight>();
+        static public List<DimmingLight> dimming_lights_list = new List<DimmingLight>();
 
         // Class that defines the properties for each light
         public class StatusLight {
@@ -32,8 +36,10 @@ namespace AircraftLightsGUI {
             public PointF Position { get; set; } // position
             public LightStatus Status { get; set; } // state
             public float Radius { get; set; } = 8f; // Size
-            public bool IsAisleLight { get; set; } = false; 
+            public bool IsAisleLight { get; set; } = false;
             public float Height { get; set; } = 30f; // Size (Seperate for isle lights)
+            
+
 
             // Detects if a light has been clicked
             public bool Contains(PointF point) {
@@ -59,12 +65,14 @@ namespace AircraftLightsGUI {
         }
 
         // Constructor for the form
-        public MainForm() {
+        public GUI() {
             InitializeComponent();
             InitializeLights();
+            InitializeGUILights();
         }
         // Sets up the form and the controls
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             Text = "Aircraft Status Monitor";
             Size = new Size(400, 550);
             StartPosition = FormStartPosition.CenterScreen;
@@ -72,7 +80,8 @@ namespace AircraftLightsGUI {
             MaximizeBox = false;
 
             // Plane drawing panel
-            planePanel = new Panel {
+            planePanel = new Panel
+            {
                 Location = new Point(10, 10),
                 Size = new Size(370, 395),
                 BorderStyle = BorderStyle.FixedSingle,
@@ -82,7 +91,8 @@ namespace AircraftLightsGUI {
             planePanel.MouseClick += PlanePanel_MouseClick;
             Controls.Add(planePanel);
             // Emergency button
-            emergencyButton = new Button {
+            emergencyButton = new Button
+            {
                 Text = "Emergency",
                 Location = new Point(10, 415),
                 Size = new Size(100, 40),
@@ -92,7 +102,8 @@ namespace AircraftLightsGUI {
             Controls.Add(emergencyButton);
 
             // Exit button
-            exitButton = new Button {
+            exitButton = new Button
+            {
                 Text = "Exit",
                 Location = new Point(10, 465),
                 Size = new Size(100, 40)
@@ -101,7 +112,8 @@ namespace AircraftLightsGUI {
             Controls.Add(exitButton);
 
             // Textbox
-            infoTextBox = new TextBox {
+            infoTextBox = new TextBox
+            {
                 Location = new Point(130, 415),
                 Size = new Size(250, 90),
                 Multiline = true,
@@ -112,8 +124,53 @@ namespace AircraftLightsGUI {
             Controls.Add(infoTextBox);
         }
 
-        // Creates and positions all of the lights
         private void InitializeLights() {
+            DimmingLight co00 = new DimmingLight("co00");
+            dimming_lights_list.Add(co00);
+            DimmingLight co01 = new DimmingLight("co01");
+            dimming_lights_list.Add(co01);
+            DimmingLight co02 = new DimmingLight("co02");
+            dimming_lights_list.Add(co02);
+
+            DimmingLight ai00 = new DimmingLight("ai00");
+            dimming_lights_list.Add(ai00);
+            DimmingLight ai01 = new DimmingLight("ai01");
+            dimming_lights_list.Add(ai01);
+            DimmingLight ai02 = new DimmingLight("ai02");
+            dimming_lights_list.Add(ai02);
+
+            DimmingLight se00 = new DimmingLight("se00");
+            dimming_lights_list.Add(se00);
+            DimmingLight se01 = new DimmingLight("se01");
+            dimming_lights_list.Add(se01);
+            DimmingLight se02 = new DimmingLight("se02");
+            dimming_lights_list.Add(se02);
+            DimmingLight se03 = new DimmingLight("se03");
+            dimming_lights_list.Add(se03);
+            DimmingLight se04 = new DimmingLight("se04");
+            dimming_lights_list.Add(se04);
+            DimmingLight se05 = new DimmingLight("se05");
+            dimming_lights_list.Add(se05);
+            DimmingLight se06 = new DimmingLight("se06");
+            dimming_lights_list.Add(se06);
+            DimmingLight se07 = new DimmingLight("se07");
+            dimming_lights_list.Add(se07);
+
+            ExteriorLight ta00 = new ExteriorLight("ta00");
+            exterior_lights_list.Add(ta00);
+            ExteriorLight ta01 = new ExteriorLight("ta01");
+            exterior_lights_list.Add(ta01);
+            ExteriorLight ta02 = new ExteriorLight("ta02");
+            exterior_lights_list.Add(ta02);
+            ExteriorLight wi00 = new ExteriorLight("wi00");
+            exterior_lights_list.Add(wi00);
+            ExteriorLight wi01 = new ExteriorLight("wi01");
+            exterior_lights_list.Add(wi01);
+            
+        }
+
+        // Creates and positions all of the lights
+        private void InitializeGUILights() {
             lights = new List<StatusLight>();
 
             // Nose section
@@ -139,9 +196,9 @@ namespace AircraftLightsGUI {
             // Aisle lights - these are different since they are rectuangular
             lights.AddRange(new[]
             {
-                new StatusLight { ID = "ai01", DisplayName = "Aisle Light 1", Position = new PointF(185, 150), IsAisleLight = true, Height = 50f },
-                new StatusLight { ID = "ai02", DisplayName = "Aisle Light 2", Position = new PointF(185, 200), IsAisleLight = true, Height = 50f },
-                new StatusLight { ID = "ai03", DisplayName = "Aisle Light 3", Position = new PointF(185, 250), IsAisleLight = true, Height = 50f }
+                new StatusLight { ID = "ai00", DisplayName = "Aisle Light 1", Position = new PointF(185, 150), IsAisleLight = true, Height = 50f },
+                new StatusLight { ID = "ai01", DisplayName = "Aisle Light 2", Position = new PointF(185, 200), IsAisleLight = true, Height = 50f },
+                new StatusLight { ID = "ai02", DisplayName = "Aisle Light 3", Position = new PointF(185, 250), IsAisleLight = true, Height = 50f }
             });
 
             // Tail
@@ -271,7 +328,7 @@ namespace AircraftLightsGUI {
                 var item = new ToolStripMenuItem(text);
                 //update below to call Joels method to update light status
                 //item.Click += (s, e) => SetLightStatus(light, status);
-                UpdateLightClass(light, status);
+                UpdateLightClass(light.ID, status.ToString());
                 menu.Items.Add(item);
             }
 
@@ -284,25 +341,39 @@ namespace AircraftLightsGUI {
         }
 
         // Function called to update lights
-        private void SetLightStatus(StatusLight light, bool isFault, bool isEmergency, bool isOn) {
-            if (isFault)
-            { light.Status = LightStatus.Fault; }
-            else if (isEmergency)
-            { light.Status = LightStatus.Emergency; }
-            else if (isOn)
-            { light.Status = LightStatus.On; }
-            else { light.Status = LightStatus.Off; }
-            planePanel.Invalidate();
+        public void UpdateLightStatus(string lightID, bool isFault, bool isEmergency, bool isOn) {
+            foreach (StatusLight light in lights)
+            {
+                if (lightID == light.ID)
+                {
+                    if (isFault)
+                    { light.Status = LightStatus.Fault; }
+                    else if (isEmergency)
+                    { light.Status = LightStatus.Emergency; }
+                    else if (isOn)
+                    { light.Status = LightStatus.On; }
+                    else { light.Status = LightStatus.Off; }
+                    planePanel.Invalidate();
+                    break;
+                }   
+            }
         }
 
         // The same function but without 'emergency' since not every light has that property
-        private void UpdateLightStatus(StatusLight light, bool isFault, bool isOn) {
-            if (isFault)
-            { light.Status = LightStatus.Fault; }
-            else if (isOn)
-            { light.Status = LightStatus.On; }
-            else { light.Status = LightStatus.Off; }
-            planePanel.Invalidate();
+        public void UpdateLightStatus(string lightID, bool isFault, bool isOn) {
+            foreach (StatusLight light in lights)
+            {
+                if (lightID == light.ID)
+                {
+                    if (isFault)
+                    { light.Status = LightStatus.Fault; }
+                    else if (isOn)
+                    { light.Status = LightStatus.On; }
+                    else { light.Status = LightStatus.Off; }
+                    planePanel.Invalidate();
+                    break;
+                }
+            }
         }
 
         // Emergency toggle
@@ -330,23 +401,56 @@ namespace AircraftLightsGUI {
             planePanel.Invalidate();
         }
 
-        private void UpdateLightClass(String lightID, string status) {
+        private void UpdateLightClass(string lightID, string status) {
             var light = lights.FirstOrDefault(light => light.ID == lightID);
-            switch (status.ToLower()) {
-                case "off":
-                    Light.TurnOff;
-                case "on":
-                    Light.TurnOn;
-                case "fault":
-                    Light.Fault(true);
-                case "emergency":
-                    Light.EmergencyMaodeOn;
-                    break;
-                case "emergencyoff":
-                    Light.EmergencyModeOff;
-            } 
-            if (status != "Fault") { Light.Fault(false); }
+            bool found = false;
 
+            foreach (DimmingLight dl in dimming_lights_list)
+            {
+                if (dl.LightId == lightID)
+                {
+                    found = true;
+                    switch (status.ToLower())
+                    {
+                        case "off":
+                            dl.TurnOff();
+                            break;
+                        case "on":
+                            dl.TurnOn();
+                            break;
+                        case "fault":
+                            dl.HasFault(true);
+                            break;
+                        case "emergency":
+                            dl.EmergencyModeOn();
+                            break;
+                        case "emergencyoff":
+                            dl.EmergencyModeOff();
+                            break;
+                    }
+                }
+            } if (!found)
+            {
+                foreach (ExteriorLight el in exterior_lights_list)
+                {
+                    if (el.LightId == lightID)
+                    {
+                        found = true;
+                        switch (status.ToLower())
+                        {
+                            case "off":
+                                el.TurnOff();
+                                break;
+                            case "on":
+                                el.TurnOn();
+                                break;
+                            case "fault":
+                                el.HasFault(true);
+                                break;
+                        }
+                    }
+                }
+            }
         }
     }
 }

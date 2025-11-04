@@ -34,25 +34,27 @@ namespace AircraftLightsGUI
         }
 
         // Turn on light if no fault, update GUI and log event
-        public virtual bool TurnOn()
+        public virtual void TurnOn()
         {
             if (!IsFault)
             {
                 IsOn = true;
-                GUI.UpdateLightStatus(LightId, IsOn, IsFault);
-                LogFile.WriteEvent(FlightInfo.CurrentTime, LightId, "turned ON"); 
-                return true;
+                Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault);
+                LogFile.WriteEvent(FlightInfo.current_time, LightId, "turned ON");
             }
-            return false;
+            else
+            {
+                Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault);
+                LogFile.WriteEvent(FlightInfo.current_time, LightId, "FAULT detected");
+            }
         }
 
         // Turn off light, update GUI and log event
-        public virtual bool TurnOff()
+        public virtual void TurnOff()
         {
             IsOn = false;
-            GUI.UpdateLightStatus(LightId, IsOn, IsFault);
-            LogFile.WriteEvent(FlightInfo.CurrentTime, LightId, "turned OFF");
-            return true;
+            Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault);
+            LogFile.WriteEvent(FlightInfo.current_time, LightId, "turned OFF");
         }
 
         // Sets fault status and turns off light if fault is true, update GUI and log event
@@ -62,9 +64,9 @@ namespace AircraftLightsGUI
             if (IsFault && IsOn)
             {
                 TurnOff();
+                Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault);
+                LogFile.WriteEvent(FlightInfo.current_time, LightId, "FAULT detected");
             }
-            GUI.UpdateLightStatus(LightId, IsOn, IsFault);
-            LogFile.WriteEvent(FlightInfo.CurrentTime, LightId, "FAULT detected ");
         }
     }
 }

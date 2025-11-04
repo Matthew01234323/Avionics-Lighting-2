@@ -11,17 +11,11 @@ namespace AircraftLightsGUI
         static DateTime landing_time;
         static DateTime sunset_time;
         static DateTime sunrise_time;
-        static string json_filepath = "C:\\Users\\samho\\OneDrive\\Documents\\B&FC\\Year 2\\Object Oriented Programming\\Assignment 2\\Local_Repo\\Avionics-Lighting-Interface\\Avionics-Lighting-Interface\\Flight_Info_File\\";
+        static string json_filepath = "C:\\Users\\samho\\OneDrive\\Documents\\B&FC\\Year 2\\Object Oriented Programming\\Assignment 2\\Final_Repo\\Avionics-Lighting-2\\Aircraft Lighting System\\Backend (Sam add code)\\Flight_Info_File\\";
         static string json_filename = "flight_data.json";
         static public DateTime current_time;
 
         static Random rnd = new Random();
-
-        //static public List<ExteriorLight> exterior_lights_list = new List<ExteriorLight>();
-        //static public List<DimmingLight> dimming_lights_list = new List<DimmingLight>();
-        //static public List<AsileLight> exterior_lights_list = new List<AsileLight>();
-        //static public List<InteriorLight> exterior_lights_list = new List<InteriorLight>();
-        //static public List<Light> all_lights_list = new List<Light>();
 
         public static void ReadFlightInfo()
         {
@@ -54,13 +48,20 @@ namespace AircraftLightsGUI
 
             if (DateTime.Compare(current_time, landing_time) >= 0)
             {
-                // foreach(Light l in all_lights_list)
-                // {
-                //     if (l.IsOn)
-                //     {
-                //         l.TurnOff
-                //     }
-                // }
+                foreach (Light l in GUI.exterior_lights_list)
+                {
+                    if (l.IsOn)
+                    {
+                        l.TurnOff();
+                    }
+                }
+                foreach (Light l in GUI.dimming_lights_list)
+                {
+                    if (l.IsOn)
+                    {
+                        l.TurnOff();
+                    }
+                }
                 LogFile.WriteEvent(current_time, "System", "Plane has landed");
                 Program.InFlight = false;
             }
@@ -68,16 +69,16 @@ namespace AircraftLightsGUI
             {
                 if (DateTime.Compare(current_time, sunset_time) > 0 && DateTime.Compare(current_time, sunrise_time) < 0)
                 {
-                    // foreach(ExteriorLight el in exterior_lights_list)
-                    // {
-                    //     if (!el.IsOn)
-                    //     {
-                    //         el.TurnOn();
-                    //     }
+                    foreach(ExteriorLight el in GUI.exterior_lights_list)
+                    {
+                        if (!el.IsOn)
+                        {
+                            el.TurnOn();
+                        }
 
-                    // }
+                    }
 
-                    // foreach(AsileLight al in asile_lights_list)
+                    // foreach(DimmingLight al in dimming_lights_list)
                     // {
                     //     if (al.brightness != 3)
                     //     {
