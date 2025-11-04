@@ -40,7 +40,7 @@ namespace AircraftLightsGUI
         {
             IsDisabled = true;
             base.TurnOff();
-            GUI.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
+            Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
             LogFile.WriteEvent(FlightInfo.current_time, LightId, "DISABLED");
         }
 
@@ -48,7 +48,7 @@ namespace AircraftLightsGUI
         public void Enable()
         {
             IsDisabled = false;
-            GUI.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
+            Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
             LogFile.WriteEvent(FlightInfo.current_time, LightId, "ENABLED");
         }
 
@@ -56,7 +56,7 @@ namespace AircraftLightsGUI
         public void SetColour(string newColour)
         {
             Colour = newColour;
-            GUI.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
+            Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
             LogFile.WriteEvent(FlightInfo.current_time, LightId, "Colour set to " + newColour);
         }
         // Activate emergency mode: set colour to Red, update GUI and log event
@@ -71,7 +71,7 @@ namespace AircraftLightsGUI
                 TurnOn();
             }
             SetColour("Red");
-            GUI.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
+            Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
             LogFile.WriteEvent(FlightInfo.current_time, LightId, "Set to Emergency Mode");  
         }
 
@@ -81,7 +81,7 @@ namespace AircraftLightsGUI
             IsEmergency = false;
             IsDisabled = false;
             SetColour("White");
-            GUI.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
+            Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault, IsEmergency);
             LogFile.WriteEvent(FlightInfo.current_time, LightId, "Emergency Mode OFF, colour set to White, light ENABLED");
         }
 

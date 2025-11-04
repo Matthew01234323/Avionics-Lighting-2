@@ -26,13 +26,13 @@ namespace AircraftLightsGUI
             if (!IsOn)
             {
                 IsFlashing = false;
-                GUI.UpdateLightStatus(LightId, IsOn, IsFault);
+                Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault);
                 LogFile.WriteEvent(FlightInfo.current_time, LightId, "Cannot enable flashing when light is OFF");
             }
             else
             {
                 IsFlashing = true;
-                GUI.UpdateLightStatus(LightId, IsOn, IsFault);
+                Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault);
                 LogFile.WriteEvent(FlightInfo.current_time, LightId, "Flashing mode ENABLED");
             }
         }
@@ -41,20 +41,19 @@ namespace AircraftLightsGUI
         public void DisableFlashing()
         {
             IsFlashing = false;
-            GUI.UpdateLightStatus(LightId, IsOn, IsFault);
+            Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault);
             LogFile.WriteEvent(FlightInfo.current_time, LightId, "Flashing mode DISABLED");
         }
 
         // Turn off light and disable flashing mode if active
-        public override bool TurnOff()
+        public override void TurnOff()
         {
             if (IsFlashing)
             {
                 IsFlashing = false;
-                GUI.UpdateLightStatus(LightId, IsOn, IsFault);
+                Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault);
                 LogFile.WriteEvent(FlightInfo.current_time, LightId, "turned OFF");
             }
-            return base.TurnOff();
         }
     }
 }
