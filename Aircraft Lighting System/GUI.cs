@@ -319,16 +319,22 @@ namespace AircraftLightsGUI {
         }
 
         // Shows the pop-up when a light is clicked
-        private void ShowLightContextMenu(StatusLight light, Point location) {
+        private void ShowLightContextMenu(StatusLight light, Point location)
+        {
             ContextMenuStrip menu = new ContextMenuStrip();
             menu.Items.Add($"{light.DisplayName}").Enabled = false;
             menu.Items.Add(new ToolStripSeparator());
 
-            void AddItem(string text, LightStatus status) {
+            void AddItem(string text, LightStatus status)
+            {
                 var item = new ToolStripMenuItem(text);
                 //update below to call Joels method to update light status
                 //item.Click += (s, e) => SetLightStatus(light, status);
-                UpdateLightClass(light.ID, status.ToString());
+                //UpdateLightClass(light.ID, status.ToString());
+                item.Click += (s, e) =>
+                {
+                    UpdateLightClass(light.ID, status.ToString().ToLower());
+                };
                 menu.Items.Add(item);
             }
 
@@ -341,7 +347,8 @@ namespace AircraftLightsGUI {
         }
 
         // Function called to update lights
-        public void UpdateLightStatus(string lightID, bool isFault, bool isEmergency, bool isOn) {
+        public void UpdateLightStatus(string lightID, bool isOn, bool isFault, bool isEmergency)
+        {
             foreach (StatusLight light in lights)
             {
                 if (lightID == light.ID)
@@ -355,12 +362,12 @@ namespace AircraftLightsGUI {
                     else { light.Status = LightStatus.Off; }
                     planePanel.Invalidate();
                     break;
-                }   
+                }
             }
         }
 
         // The same function but without 'emergency' since not every light has that property
-        public void UpdateLightStatus(string lightID, bool isFault, bool isOn) {
+        public void UpdateLightStatus(string lightID, bool isOn, bool isFault) {
             foreach (StatusLight light in lights)
             {
                 if (lightID == light.ID)
@@ -381,9 +388,9 @@ namespace AircraftLightsGUI {
         private void EmergencyButton_Click(object sender, EventArgs e) {
             if (IsEmergency == false) {
                 IsEmergency = true;
+                UpdateLightClass("ai00", "emergency");
                 UpdateLightClass("ai01", "emergency");
                 UpdateLightClass("ai02", "emergency");
-                UpdateLightClass("ai03", "emergency");
                 UpdateLightClass("co00", "emergency");
                 UpdateLightClass("co01", "emergency");
                 UpdateLightClass("co02", "emergency");
@@ -391,18 +398,17 @@ namespace AircraftLightsGUI {
             }
             else {
                 IsEmergency = false;
+                UpdateLightClass("ai00", "emergencyoff");
                 UpdateLightClass("ai01", "emergencyoff");
                 UpdateLightClass("ai02", "emergencyoff");
-                UpdateLightClass("ai03", "emergencyoff");
                 UpdateLightClass("co00", "emergencyoff");
                 UpdateLightClass("co01", "emergencyoff");
                 UpdateLightClass("co02", "emergencyoff");
             }
-            planePanel.Invalidate();
         }
 
         private void UpdateLightClass(string lightID, string status) {
-            var light = lights.FirstOrDefault(light => light.ID == lightID);
+            //var light = lights.FirstOrDefault(light => light.ID == lightID);
             bool found = false;
 
             foreach (DimmingLight dl in dimming_lights_list)
@@ -428,6 +434,7 @@ namespace AircraftLightsGUI {
                             dl.EmergencyModeOff();
                             break;
                     }
+                    break;
                 }
             } if (!found)
             {
@@ -448,6 +455,7 @@ namespace AircraftLightsGUI {
                                 el.HasFault(true);
                                 break;
                         }
+                        break;
                     }
                 }
             }
