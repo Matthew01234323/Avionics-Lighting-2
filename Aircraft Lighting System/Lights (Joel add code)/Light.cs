@@ -39,12 +39,12 @@ namespace AircraftLightsGUI
             if (!IsFault)
             {
                 IsOn = true;
-                Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault);
+                Program.MainFormInstance?.UpdateLightStatus(this.LightId, IsOn, IsFault);
                 LogFile.WriteEvent(FlightInfo.current_time, LightId, "turned ON");
             }
             else
             {
-                Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault);
+                Program.MainFormInstance?.UpdateLightStatus(this.LightId, IsOn, IsFault);
                 LogFile.WriteEvent(FlightInfo.current_time, LightId, "FAULT detected");
             }
         }
@@ -53,7 +53,7 @@ namespace AircraftLightsGUI
         public virtual void TurnOff()
         {
             IsOn = false;
-            Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault);
+            Program.MainFormInstance?.UpdateLightStatus(this.LightId, IsOn, IsFault);
             LogFile.WriteEvent(FlightInfo.current_time, LightId, "turned OFF");
         }
 
@@ -64,7 +64,7 @@ namespace AircraftLightsGUI
             if (IsFault && IsOn)
             {
                 TurnOff();
-                Program.MainFormInstance?.UpdateLightStatus(LightId, IsOn, IsFault);
+                Program.MainFormInstance?.UpdateLightStatus(this.LightId, IsOn, IsFault);
                 LogFile.WriteEvent(FlightInfo.current_time, LightId, "FAULT detected");
             }
         }
