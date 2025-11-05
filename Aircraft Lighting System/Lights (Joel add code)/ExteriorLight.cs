@@ -48,11 +48,11 @@ namespace AircraftLightsGUI
         // Turn off light and disable flashing mode if active
         public override void TurnOff()
         {
+            base.TurnOff();
+
             if (IsFlashing)
             {
                 IsFlashing = false;
-                Program.MainFormInstance?.UpdateLightStatus(this.LightId, IsOn, IsFault);
-                LogFile.WriteEvent(FlightInfo.current_time, LightId, "turned OFF");
             }
         }
     }
