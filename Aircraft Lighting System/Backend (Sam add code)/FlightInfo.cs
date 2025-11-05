@@ -116,6 +116,10 @@ namespace AircraftLightsGUI
                         {
                             sl.IsFault = true;
                         }
+                        else if (rnd_value > 80 && rnd_value <= 90)
+                        {
+                            sl.SetBrightness(rnd_value - 80);
+                        }
                         else if (rnd_value > 90)
                         {
                             if (sl.IsOn)
