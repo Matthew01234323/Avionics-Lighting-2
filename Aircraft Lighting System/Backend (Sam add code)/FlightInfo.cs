@@ -16,6 +16,7 @@ namespace AircraftLightsGUI
         static public DateTime current_time;
 
         static Random rnd = new Random();
+        static bool in_flight = false;
 
         public static void ReadFlightInfo()
         {
@@ -32,7 +33,7 @@ namespace AircraftLightsGUI
 
                 current_time = takeoff_time;
 
-                Program.InFlight = true;
+                in_flight = true;
 
                 LogFile.WriteEvent(current_time, "System", "Flight Info read successfully");
             }
@@ -41,7 +42,7 @@ namespace AircraftLightsGUI
                 LogFile.WriteEvent(DateTime.Now, "System", $"Error when reading flight info file: {e}");
             }
         }
-        
+
         static public void CheckEvents()
         {
             int rnd_value;
@@ -63,13 +64,13 @@ namespace AircraftLightsGUI
                     }
                 }
                 LogFile.WriteEvent(current_time, "System", "Plane has landed");
-                Program.InFlight = false;
+                in_flight = false;
             }
             else
             {
                 if (DateTime.Compare(current_time, sunset_time) > 0 && DateTime.Compare(current_time, sunrise_time) < 0)
                 {
-                    foreach(ExteriorLight el in GUI.exterior_lights_list)
+                    foreach (ExteriorLight el in GUI.exterior_lights_list)
                     {
                         if (!el.IsOn)
                         {
@@ -104,7 +105,7 @@ namespace AircraftLightsGUI
                     //     }
                     // }
                 }
-                
+
                 // foreach(DimmingLight dl in dimming_lights_list)
                 // {
                 //     if (!dl.IsFault)
@@ -131,6 +132,15 @@ namespace AircraftLightsGUI
             }
 
             current_time = current_time.AddMinutes(5);
+        }
+
+        static public async Task UpdateTime()
+        {
+            while (in_flight)
+            {
+                await Task.Delay(2000);
+                FlightInfo.CheckEvents();
+            }
         }
     }
 }
