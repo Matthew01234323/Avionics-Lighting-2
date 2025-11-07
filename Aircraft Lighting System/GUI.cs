@@ -14,7 +14,7 @@ namespace AircraftLightsGUI {
         private TextBox infoTextBox;
 
         // Lists of all the lights
-        private List<StatusLight> lights;
+        public List<StatusLight> lights;
         private StatusLight selectedLight;
 
         // The different light states
