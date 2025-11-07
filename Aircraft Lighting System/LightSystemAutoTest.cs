@@ -81,12 +81,12 @@ namespace AircraftLightsGUITests
                 var gui = new GUI();
 
                 // Force a fault
-                gui.UpdateLightStatus("co00", isFault: true, isOn: false);
+                gui.UpdateLightClass("co00", "fault");
                 var light = gui.lights.First(l => l.ID == "co00");
                 passed &= light.Status == GUI.LightStatus.Fault;
 
                 // Attempt to turn on
-                gui.UpdateLightStatus("co00", isFault: false, isOn: true);
+                gui.UpdateLightClass("co00", "faultoff");
                 passed &= light.Status == GUI.LightStatus.Fault; // Should remain faulted
             }
             catch { passed = false; }

@@ -401,7 +401,7 @@ namespace AircraftLightsGUI {
             planePanel.Invalidate();
         }
 
-        private void UpdateLightClass(string lightID, string status) {
+        public void UpdateLightClass(string lightID, string status) {
             var light = lights.FirstOrDefault(light => light.ID == lightID);
             bool found = false;
 
