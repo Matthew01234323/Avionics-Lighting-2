@@ -35,23 +35,6 @@ namespace AircraftLightsGUI
 
         }
 
-        // Disable local control of the light, update GUI and log event
-        public void Disable()
-        {
-            IsDisabled = true;
-            base.TurnOff();
-            Program.MainFormInstance?.UpdateLightStatus(this.LightId, IsOn, IsFault, IsEmergency);
-            LogFile.WriteEvent(FlightInfo.current_time, LightId, "DISABLED");
-        }
-
-        // Enable local control of the light, update GUI and log event
-        public void Enable()
-        {
-            IsDisabled = false;
-            Program.MainFormInstance?.UpdateLightStatus(this.LightId, IsOn, IsFault, IsEmergency);
-            LogFile.WriteEvent(FlightInfo.current_time, LightId, "ENABLED");
-        }
-
         // Set the colour of the light, log event and update GUI
         public void SetColour(string newColour)
         {
@@ -59,8 +42,8 @@ namespace AircraftLightsGUI
             Program.MainFormInstance?.UpdateLightStatus(this.LightId, IsOn, IsFault, IsEmergency);
             LogFile.WriteEvent(FlightInfo.current_time, LightId, "Colour set to " + newColour);
         }
-        // Activate emergency mode: set colour to Red, update GUI and log event
 
+        // Activate emergency mode: set colour to Red, update GUI and log event
         public void EmergencyModeOn()
         {
             
@@ -85,10 +68,11 @@ namespace AircraftLightsGUI
             LogFile.WriteEvent(FlightInfo.current_time, LightId, "Emergency Mode OFF, colour set to White, light ENABLED");
         }
 
-        // Features for next version:
+        /* FEATRUES FOR FUTURE VERSIONS
 
-        // Control TurnOn based on disabled status and log event
-        /*public override bool TurnOn()
+        //Control TurnOn based on disabled status and log event
+
+        public override bool TurnOn()
         {
             if (!IsDisabled)
             {
@@ -99,7 +83,29 @@ namespace AircraftLightsGUI
                 //LogFile.WriteEvent(FlightInfo.CurrentTime, LightId, "Turn ON blocked - light is DISABLED");
                 return false;
             }
-        }*/
+        
+        }
+
+
+        // Disable local control of the light, update GUI and log event
+
+        public void Disable()
+        {
+            IsDisabled = true;
+            base.TurnOff();
+            Program.MainFormInstance?.UpdateLightStatus(this.LightId, IsOn, IsFault, IsEmergency);
+            LogFile.WriteEvent(FlightInfo.current_time, LightId, "DISABLED");
+        }
+
+        // Enable local control of the light, update GUI and log event
+        public void Enable()
+        {
+            IsDisabled = false;
+            Program.MainFormInstance?.UpdateLightStatus(this.LightId, IsOn, IsFault, IsEmergency);
+            LogFile.WriteEvent(FlightInfo.current_time, LightId, "ENABLED");
+        }
+
+        */
     }
 }
 
