@@ -85,10 +85,10 @@ namespace AircraftLightsGUI
             LogFile.WriteEvent(FlightInfo.current_time, LightId, "Emergency Mode OFF, colour set to White, light ENABLED");
         }
 
-        // Features for next version:
+        /* Features for next version:
 
-        // Control TurnOn based on disabled status and log event
-        /*public override bool TurnOn()
+        Control TurnOn based on disabled status and log event
+        public override bool TurnOn()
         {
             if (!IsDisabled)
             {
@@ -99,7 +99,9 @@ namespace AircraftLightsGUI
                 //LogFile.WriteEvent(FlightInfo.CurrentTime, LightId, "Turn ON blocked - light is DISABLED");
                 return false;
             }
-        }*/
+        
+        }
+        */
     }
 }
 
