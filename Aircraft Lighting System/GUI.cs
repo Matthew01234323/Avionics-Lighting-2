@@ -11,7 +11,6 @@ namespace AircraftLightsGUI {
         private Panel planePanel;
         private Button emergencyButton;
         private Button exitButton;
-        private TextBox infoTextBox;
 
         // Lists of all the lights
         private List<StatusLight> lights;
@@ -74,7 +73,7 @@ namespace AircraftLightsGUI {
         private void InitializeComponent()
         {
             Text = "Aircraft Status Monitor";
-            Size = new Size(400, 550);
+            Size = new Size(400, 510);
             StartPosition = FormStartPosition.CenterScreen;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
@@ -105,23 +104,11 @@ namespace AircraftLightsGUI {
             exitButton = new Button
             {
                 Text = "Exit",
-                Location = new Point(10, 465),
+                Location = new Point(140, 415),
                 Size = new Size(100, 40)
             };
             exitButton.Click += (s, e) => Close();
             Controls.Add(exitButton);
-
-            // Textbox
-            infoTextBox = new TextBox
-            {
-                Location = new Point(130, 415),
-                Size = new Size(250, 90),
-                Multiline = true,
-                ReadOnly = true,
-                BackColor = Color.White,
-                Text = ""
-            };
-            Controls.Add(infoTextBox);
         }
 
         private void InitializeLights() {
