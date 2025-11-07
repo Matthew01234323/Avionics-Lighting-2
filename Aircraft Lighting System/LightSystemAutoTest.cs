@@ -23,9 +23,40 @@ namespace AircraftLightsGUITests
             Test_GUI_EmergencyModeUpdates();
             Test_GUI_FaultedLightsCannotBeChanged();
             Test_GUI_UpdateLightStatusMethodWorks();
+            Test_GUI_AllLightsInitialized();
 
             Console.WriteLine("All GUI automated tests completed. Check 'TestResults.txt'.");
         }
+
+        private static void Test_GUI_AllLightsInitialized()
+        {
+            bool passed = true;
+            try
+            {
+                var gui = new GUI();
+
+                // Collect all light IDs
+                var allLightIDs = gui.lights.Select(l => l.ID).ToList();
+
+                // Expected total: 3 cockpit + 8 seat + 3 aisle + 3 tail + 2 wing = 19 lights
+                int expectedCount = 19;
+                passed = allLightIDs.Count == expectedCount;
+
+                // Write each light ID to the log for verification
+                File.AppendAllText(logPath, "\n--- All Light IDs ---\n");
+                foreach (var id in allLightIDs)
+                    File.AppendAllText(logPath, id + "\n");
+
+                File.AppendAllText(logPath, $"Total Lights Found: {allLightIDs.Count}\n");
+            }
+            catch
+            {
+                passed = false;
+            }
+
+            WriteToLog("Test_GUI_AllLightsInitialized", passed);
+        }
+
 
         private static void Test_GUI_LightToggleUpdates()
         {
