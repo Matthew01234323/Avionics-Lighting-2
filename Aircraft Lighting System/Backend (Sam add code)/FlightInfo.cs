@@ -16,6 +16,11 @@ namespace AircraftLightsGUI
         static public DateTime current_time;
 
         static Random rnd = new Random();
+
+        static DateTime test_time_1 = new DateTime(2025, 11, 1, 8, 5, 0);
+        static DateTime test_time_2 = new DateTime(2025, 11, 1, 8, 10, 0);
+        static DateTime test_time_3 = new DateTime(2025, 11, 1, 8, 15, 0);
+
         static bool in_flight = false;
 
         public static void ReadFlightInfo()
@@ -79,7 +84,7 @@ namespace AircraftLightsGUI
 
                     }
 
-                    foreach(DimmingLight al in GUI.dimming_lights_list)
+                    foreach (DimmingLight al in GUI.dimming_lights_list)
                     {
                         if (al.LightId.Contains("ai"))
                         {
@@ -89,7 +94,7 @@ namespace AircraftLightsGUI
                 }
                 else
                 {
-                    foreach(ExteriorLight el in GUI.exterior_lights_list)
+                    foreach (ExteriorLight el in GUI.exterior_lights_list)
                     {
                         if (el.IsOn)
                         {
@@ -97,7 +102,7 @@ namespace AircraftLightsGUI
                         }
 
                     }
-                    foreach(DimmingLight al in GUI.dimming_lights_list)
+                    foreach (DimmingLight al in GUI.dimming_lights_list)
                     {
                         if (al.LightId.Contains("ai"))
                         {
@@ -106,36 +111,29 @@ namespace AircraftLightsGUI
                     }
                 }
 
-                foreach(DimmingLight sl in GUI.dimming_lights_list)
+                foreach (DimmingLight dl in GUI.dimming_lights_list)
                 {
-                    if (!sl.IsFault && sl.LightId.Contains("se"))
+                    if (dl.LightId == "se00")
                     {
-                        rnd_value = rnd.Next(1, 101);
-
-                        if (rnd_value == 1)
+                        if (DateTime.Compare(current_time, test_time_1) == 0)
                         {
-                            sl.IsFault = true;
+                            dl.TurnOn();
                         }
-                        else if (rnd_value > 80 && rnd_value <= 90)
+                        else if (DateTime.Compare(current_time, test_time_2) == 0)
                         {
-                            sl.SetBrightness(rnd_value - 80);
+                            dl.TurnOff();
                         }
-                        else if (rnd_value > 90)
+                        else if (DateTime.Compare(current_time, test_time_3) == 0)
                         {
-                            if (sl.IsOn)
-                            {
-                                sl.TurnOff();
-                            }
-                            else
-                            {
-                                sl.TurnOn();
-                            }
+                            dl.HasFault(true);
+                            dl.TurnOn();
                         }
                     }
                 }
+                current_time = current_time.AddMinutes(5);
             }
 
-            current_time = current_time.AddMinutes(5);
+            
         }
 
         static public async Task UpdateTime()
