@@ -1,0 +1,24 @@
+01/11/2025 08:00:00 System: Flight Info read successfully
+01/11/2025 08:00:00 ai00: brightness set to 7
+01/11/2025 08:00:00 ai01: brightness set to 7
+01/11/2025 08:00:00 ai02: brightness set to 7
+01/11/2025 08:05:00 se00: turned ON
+01/11/2025 08:10:00 se00: turned OFF
+01/11/2025 08:15:00 se00: FAULT detected
+01/11/2025 08:25:00 ta00: turned ON
+01/11/2025 08:25:00 ta01: turned ON
+01/11/2025 08:25:00 ta02: turned ON
+01/11/2025 08:25:00 wi00: turned ON
+01/11/2025 08:25:00 wi01: turned ON
+01/11/2025 08:25:00 ai00: brightness set to 3
+01/11/2025 08:25:00 ai01: brightness set to 3
+01/11/2025 08:25:00 ai02: brightness set to 3
+01/11/2025 08:30:00 ta00: turned OFF
+01/11/2025 08:30:00 ta01: turned OFF
+01/11/2025 08:30:00 ta02: turned OFF
+01/11/2025 08:30:00 wi00: turned OFF
+01/11/2025 08:30:00 wi01: turned OFF
+01/11/2025 08:30:00 ai00: brightness set to 7
+01/11/2025 08:30:00 ai01: brightness set to 7
+01/11/2025 08:30:00 ai02: brightness set to 7
+01/11/2025 08:35:00 System: Plane has landed
