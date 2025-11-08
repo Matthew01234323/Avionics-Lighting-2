@@ -11,7 +11,7 @@ namespace AircraftLightsGUI
         static DateTime landing_time;
         static DateTime sunset_time;
         static DateTime sunrise_time;
-        static string json_filepath = "C:\\Users\\Matthew\\Desktop\\University\\Year 2\\Object Oriented Programming\\Assignment 2\\";
+        static string json_filepath = "C:\\Users\\samho\\OneDrive\\Documents\\B&FC\\Year 2\\Object Oriented Programming\\Assignment 2\\Final_Repo\\Avionics-Lighting-2\\Aircraft Lighting System\\Backend (Sam add code)\\Flight_Info_File\\";
         static string json_filename = "flight_data.json";
         static public DateTime current_time;
 
