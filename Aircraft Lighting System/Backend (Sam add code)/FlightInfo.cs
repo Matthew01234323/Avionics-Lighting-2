@@ -15,6 +15,10 @@ namespace AircraftLightsGUI
         static string json_filename = "flight_data.json";
         static public DateTime current_time;
 
+        static DateTime test_time_1 = new DateTime(2025, 11, 1, 8, 5, 0);
+        static DateTime test_time_2 = new DateTime(2025, 11, 1, 8, 10, 0);
+        static DateTime test_time_3 = new DateTime(2025, 11, 1, 8, 15, 0);
+
         static Random rnd = new Random();
 
         public static void ReadFlightInfo()
@@ -78,7 +82,7 @@ namespace AircraftLightsGUI
 
                     }
 
-                    // foreach(DimmingLight al in dimming_lights_list)
+                    // foreach(AsileLight al in GUI.asile_lights_list)
                     // {
                     //     if (al.brightness != 3)
                     //     {
@@ -88,46 +92,42 @@ namespace AircraftLightsGUI
                 }
                 else
                 {
-                    // foreach(ExteriorLight el in exterior_lights_list)
-                    // {
-                    //     if (el.IsOn)
-                    //     {
-                    //         el.TurnOff();
-                    //     }
+                    foreach(ExteriorLight el in GUI.exterior_lights_list)
+                    {
+                        if (el.IsOn)
+                        {
+                            el.TurnOff();
+                        }
 
-                    // }
-                    // foreach(AsileLight al in asile_lights_list)
+                    }
+                    // foreach(AsileLight al in GUI.asile_lights_list)
                     // {
-                    //     if (al.brightness != 5)
+                    //     if (al.brightness != 7)
                     //     {
-                    //         al.brightness = 5;
+                    //         al.brightness = 7;
                     //     }
                     // }
                 }
                 
-                // foreach(DimmingLight dl in dimming_lights_list)
-                // {
-                //     if (!dl.IsFault)
-                //     {
-                //         rnd_value = rnd.Next(1, 101);
-
-                //         if (rnd_value == 1)
-                //         {
-                //             dl.IsFault = true;
-                //         }
-                //         else if (rnd_value > 90)
-                //         {
-                //             if (dl.IsOn)
-                //             {
-                //                 dl.TurnOff();
-                //             }
-                //             else
-                //             {
-                //                 dl.TurnOn();
-                //             }
-                //         }
-                //     }
-                // }
+                foreach(DimmingLight dl in GUI.dimming_lights_list)
+                {
+                    if (dl.LightId == "se00")
+                    {
+                        if (DateTime.Compare(current_time, test_time_1) == 0)
+                        {
+                            dl.TurnOn();
+                        }
+                        else if (DateTime.Compare(current_time, test_time_2) == 0)
+                        {
+                            dl.TurnOff();
+                        }
+                        else if (DateTime.Compare(current_time, test_time_3) == 0)
+                        {
+                            dl.HasFault(true);
+                            dl.TurnOn();
+                        }
+                    }
+                }
             }
 
             current_time = current_time.AddMinutes(5);
