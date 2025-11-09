@@ -7,12 +7,12 @@ namespace AircraftLightsGUI
         [STAThread]
         static void Main()
         {
-            FlightInfo.ReadFlightInfo();
-            FlightInfo.UpdateTime();
+            FlightInfo.ReadFlightInfo(); //read JSON file to get flight, sunset and sunrise times
+            FlightInfo.UpdateTime(); //start time incrementation and checks
 
             ApplicationConfiguration.Initialize();
             MainFormInstance = new GUI();
-            Application.Run(MainFormInstance);
+            Application.Run(MainFormInstance); //run GUI
 
 
         }

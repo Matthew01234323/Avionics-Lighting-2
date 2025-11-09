@@ -23,8 +23,8 @@ namespace AircraftLightsGUI
             try
             {
                 using FileStream json_stream = new FileStream($"{json_filepath}{json_filename}", FileMode.Open, FileAccess.Read);
-                using JsonDocument doc = JsonDocument.Parse(json_stream);
-                JsonElement root = doc.RootElement;
+                using JsonDocument doc = JsonDocument.Parse(json_stream); //converts file contents to JSON
+                JsonElement root = doc.RootElement; //sets root JSON element to allow values to be extracted
 
                 takeoff_time = root.GetProperty("takeoff_time").GetDateTime();
                 landing_time = root.GetProperty("landing_time").GetDateTime();
@@ -47,7 +47,7 @@ namespace AircraftLightsGUI
         {
             int rnd_value;
 
-            if (DateTime.Compare(current_time, landing_time) >= 0)
+            if (DateTime.Compare(current_time, landing_time) >= 0) //checks if time has reached or surpassed landing time set in JSON file
             {
                 foreach (Light l in GUI.exterior_lights_list)
                 {
@@ -64,11 +64,11 @@ namespace AircraftLightsGUI
                     }
                 }
                 LogFile.WriteEvent(current_time, "System", "Plane has landed");
-                in_flight = false;
+                in_flight = false; //stops checks and time incrementation
             }
             else
             {
-                if (DateTime.Compare(current_time, sunset_time) > 0 && DateTime.Compare(current_time, sunrise_time) < 0)
+                if (DateTime.Compare(current_time, sunset_time) > 0 && DateTime.Compare(current_time, sunrise_time) < 0) //checks for time between sunset and sunrise
                 {
                     foreach (ExteriorLight el in GUI.exterior_lights_list)
                     {
@@ -81,13 +81,13 @@ namespace AircraftLightsGUI
 
                     foreach(DimmingLight al in GUI.dimming_lights_list)
                     {
-                        if (al.LightId.Contains("ai"))
+                        if (al.LightId.Contains("ai")) //uses ID system to filter to aisle lights only
                         {
                             al.SetBrightness(3);
                         }
                     }
                 }
-                else
+                else //if not between sunset and sunrise, must be daytime
                 {
                     foreach(ExteriorLight el in GUI.exterior_lights_list)
                     {
@@ -99,26 +99,26 @@ namespace AircraftLightsGUI
                     }
                     foreach(DimmingLight al in GUI.dimming_lights_list)
                     {
-                        if (al.LightId.Contains("ai"))
+                        if (al.LightId.Contains("ai")) //uses ID system to filter to aisle lights only
                         {
                             al.SetBrightness(7);
                         }
                     }
                 }
 
-                foreach(DimmingLight sl in GUI.dimming_lights_list)
+                foreach (DimmingLight sl in GUI.dimming_lights_list)
                 {
-                    if (!sl.IsFault && sl.LightId.Contains("se"))
+                    if (!sl.IsFault && sl.LightId.Contains("se")) //uses ID system to filter to seat lights only
                     {
-                        rnd_value = rnd.Next(1, 101);
+                        rnd_value = rnd.Next(1, 101); //random value simulates passenger actions
 
-                        if (rnd_value == 1)
+                        if (rnd_value == 1) //simulates small chance of light breaking
                         {
-                            sl.IsFault = true;
+                            sl.HasFault(true);
                         }
                         else if (rnd_value > 80 && rnd_value <= 90)
                         {
-                            sl.SetBrightness(rnd_value - 80);
+                            sl.SetBrightness(rnd_value - 80); //provides a 1-10 value to set brightness to
                         }
                         else if (rnd_value > 90)
                         {
@@ -133,16 +133,18 @@ namespace AircraftLightsGUI
                         }
                     }
                 }
+                
+                current_time = current_time.AddMinutes(5);
             }
 
-            current_time = current_time.AddMinutes(5);
+            
         }
 
-        static public async Task UpdateTime()
+        static public async Task UpdateTime() //async to allow task to run alongside GUI
         {
             while (in_flight)
             {
-                await Task.Delay(2000);
+                await Task.Delay(2000); //Waits 2 seconds to allow updates from previous iteration to be observed
                 FlightInfo.CheckEvents();
             }
         }
